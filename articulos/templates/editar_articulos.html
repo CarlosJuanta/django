@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articulos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="{% static 'main.css' %}"
+</head>
+<body>
+    
+    <div class="container">
+        <div class="row">
+         <div class="col-md-4 offset-md-4" >
+            <h1 align="center">Articulos</h1>
+    <form method="POST" action="{% url 'update_articulo' articulos.id %}" class="card card-body bg-secondary">
+        {% csrf_token %}
+     <label for="codigo">Codigo</label>   
+    <input type= "text" name="codigo" value=" {{articulos.codigo}}" readonly>
+    <label for="descripcion">Descripción</label>  
+    <input type="text" name="descripcion"  value=" {{articulos.descripcion}}">
+    <label for="precio">Precio</label>  
+    <input type="text" name="precio" value=" {{articulos.precio}}">
+    <label for="cantidad">Cantidad</label>  
+    <input type="text" name="cantidad" value=" {{articulos.cantidad}}">
+    <label for="categoria">Categoría</label>  
+    <input type="text" name="categoria" value=" {{articulos.categoria}}">
+    <label for="descripcioncat">Descripción</label>  
+    <input type="text" name="descripcioncat" value=" {{articulos.descripcioncat}}" class="form-control mb-4">
+    <input class="btn btn-success" type="submit" value="Actualizar" />
+    {% if messages %} {% for mess in messages %}
+    <b>{{mess}}</b>
+    {% endfor %} {% endif %}
+</form>
+</div> 
+</div>
+</body>
+</html>

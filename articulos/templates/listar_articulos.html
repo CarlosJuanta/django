@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articulos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="{% static 'main.css' %}"
+</head>
+<body>
+    
+    <div class="container">
+      <h1 align="center">CARLOS ENRIQUE JUANTÁ TAX 1490-19-21295</h1>
+        <div class="row">
+         <div class="col-md-4 offset-md-4" >
+          <h3 align="center">REGISTRO ARTICULOS</h3>
+            <form action="{% url 'nuevo_articulo' %}" method="POST" class="card card-body bg-secondary">
+                {% csrf_token %}
+            <input type= "text" name="codigo" placeholder="Código" required class="form-control"><br>
+            <input type="text" name="descripcion" placeholder="Descripcion" required class="form-control"><br>
+            <input type="text" name="precio" placeholder="Precio" required class="form-control"><br>
+            <input type="text" name="cantidad" placeholder="Cantidad" required class="form-control"><br>
+            <input type="text" name="categoria" placeholder="Categoría" required class="form-control"><br>
+            <textarea name="descripcioncat" placeholder="Descripciön Categoría" required class="form-control mb-4"></textarea> </textarea>
+        
+            <button class="btn btn-success">Guardar</button>
+           </form> 
+         </div> 
+        </div>
+    
+   
+  
+  
+    <h3 align="center">LISTADO DE ARTICULOS</h3>
+    <table class="table">
+    <tr>
+        <th>Código</th>
+        <th>Descripcion</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Categoria</th>
+        <th>Descripción</th>
+        <th>Actualizar</th>
+        <th>Eliminar</th>  
+
+    </tr>
+    {% for articulo in articulos %}  
+    <tr>
+    <td>{{articulo.codigo}} </td>
+    <td>{{articulo.descripcion}}</td>
+    <td>{{articulo.precio}} </td> 
+    <td>{{articulo.cantidad}} </td>
+    <td>{{articulo.categoria}} </td>
+    <td>{{articulo.descripcioncat}} </td>
+    <td>
+    <a class="btn btn-primary" href="actualizar/{{articulo.id}}">Editar</a>
+    </td>
+    <td>
+    <form action="{% url 'borrar_articulo' articulo.id %}" method="POST">
+        {% csrf_token %}    
+    <button class="btn btn-danger">Delete</button>
+    </td>
+   </form>   
+
+   {% endfor %}
+</table>
+</div>
+
+</div>
+ <br><br>
+
+ <div class="col-md-4 offset-md-4">
+ <h3 align="center">GRÁFICAS</h3>
+<canvas width="600px" height="600px" id="myChart"> </canvas></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+    const ctx = document.getElementById('myChart');
+    var nombres= {{grafica.nombres|safe}}
+    var numeros= {{grafica.numeros|safe}}
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: nombres,
+        datasets: [{
+          label: 'cantidad',
+          data: numeros,
+          borderWidth: 1
+        }]
+      },
+      options: { 
+         responsive:false, 
+         mantainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</html>

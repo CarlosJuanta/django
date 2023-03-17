@@ -1,0 +1,33 @@
+body{
+    background :  #202020;
+    color: white;
+} 
+
+fcc-btn {
+    background-color: #199319;
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+  }
+
+  table {
+    float:right;
+    background-color: white; 
+    text-align: left;
+    font-family: Gill Sans Extrabold;
+    font-size: 16px;
+    border-collapse: collapse;
+    width: 100%;
+   
+ }
+ th, td {
+    width: 15%;
+    text-align: center;
+    vertical-align: top;
+ }
+
+ h1, h2, h3{
+	font:"serif";
+
+	font-size:25px;	
+	}
